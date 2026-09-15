@@ -9,8 +9,8 @@ public class Bishop {
     public Bishop(){
     }
     //Bishop constructor that takes color, x, y
-    public Bishop(String piece_name, String color, char column, int row){
-        this.piece_name = piece_name;
+    public Bishop(String color, char column, int row){
+        //this.piece_name = piece_name;
         this.color = color;
         this.column = Character.toLowerCase(column);
         this.row = row;

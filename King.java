@@ -10,8 +10,7 @@ public class King {
     }
 
     //King constructor that takes color, x, y
-    public King(String piece_name, String color, char column, int row) {
-        this.piece_name = piece_name;
+    public King(String color, char column, int row) {
         this.color = color;
         this.column = Character.toLowerCase(column);
         this.row = row;
