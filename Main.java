@@ -83,7 +83,7 @@ public class Main {
                 System.out.println("Please enter an integer number.");
             }
         }
-        input.close();
+        //input.close();?
 
         //verify if the starting position is within the chesboard
         Chessboard board = new Chessboard();
@@ -134,7 +134,7 @@ public class Main {
                 System.out.println("Invalid column. Please select a valid column.");
             }
         }
-        input.close();
+        
 
         int targetRow;
         while(true) { //loop to keep asking for the user input in case user enters invalid row
@@ -153,10 +153,43 @@ public class Main {
                 System.out.println("Please enter an integer number.");
             }
         }
-        input.close();
+        //input.close();?
 
         if(targetRow != startingRow && targetCol != startingColumn.name().charAt(0)){
-          
+          if(chessPiece.verifyTarget(targetCol, targetRow)){
+            System.out.println("Piece" + chessPiece.getPiece_name() "in position <x><y> can (not) move to target position <x><y>")
+          }
+        }
+        else{
+            System.out.println("Target position must be different than starting position");
+            while (true) { // loop to keep asking for the user input in case user enters invalid column
+            System.out.println("Enter target column: 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'");
+            char userInput = input.nextLine().charAt(0); //Turns user answer into uppercase to match enum values
+
+            try {
+                targetCol = userInput;
+                System.out.println("You selected column: " + targetCol);
+                break;
+            } catch (IllegalArgumentException e) {
+                System.out.println("Invalid column. Please select a valid column.");
+            }
+        }
+             while(true) { //loop to keep asking for the user input in case user enters invalid row
+            System.out.print("Enter the target row by typing a number (1-8): ");
+            int userInput = input.nextInt();
+
+            try {
+                    targetRow = userInput;
+                if (targetRow >= 1 && targetRow <= 8) {
+                    System.out.println("You selected: " + targetRow);
+                    break;
+                } else {
+                    System.out.println("Please enter a number beetween 1-8:");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Please enter an integer number.");
+            }
+        }
         }
     }
 }
