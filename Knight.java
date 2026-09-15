@@ -17,7 +17,7 @@ public class Knight {
         this.row = row;
     }
 
-    // Getters for name, color, x, y
+    //Getters for name, color, x, y
     public String getPiece_name() { return piece_name; }
     public String getColor() { return color; }
     public char getColumn() { return column; }

@@ -9,7 +9,7 @@ public class Rook {
     public Rook() {
     }
 
-    // Rook constructor that takes color, x, y
+    //Rook constructor that takes color, x, y
     public Rook(String piece_name, String color, char column, int row) {
         this.piece_name = piece_name;
         this.color = color;

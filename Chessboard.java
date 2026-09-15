@@ -4,6 +4,7 @@ public class Chessboard {
     public static final char MIN_COL = 'a';
     public static final char MAX_COL = 'h';
 
+    //method to check if the prompted inputs are within chessboard
     public boolean withinChessboard(char column, int row){
         char lowerColumn = Character.toLowerCase(column);
 
