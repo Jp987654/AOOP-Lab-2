@@ -9,7 +9,7 @@ public class Pawn {
     public Pawn() {
     }
 
-    //Pawn constructor that takes color, x, y
+    // Pawn constructor that takes color, x, y
     public Pawn(String piece_name, String color, char column, int row) {
         this.piece_name = piece_name;
         this.color = color;

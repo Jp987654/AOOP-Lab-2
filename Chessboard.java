@@ -13,6 +13,6 @@ public class Chessboard {
         if (row < MIN_ROW || row > MAX_ROW) {
             return false;
         }
-            return true;
+        return true;
     }
 }

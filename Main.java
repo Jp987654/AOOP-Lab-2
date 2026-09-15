@@ -32,7 +32,7 @@ public class Main {
                 System.out.println("Invalid piece type. Please select a valid piece.");
             }
         }
-
+        
         //User input collection and error handling for color selection
         Color pieceColor; //Create variable to hold enum value for color
         while (true){ //Loop to keep asking for user input in case user enters invalid color

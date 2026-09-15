@@ -5,7 +5,7 @@ public class Bishop {
     private char column;
     private int row;
 
-    //Empty Bishop Constructor
+    // Empty Bishop Constructor
     public Bishop(){
     }
     //Bishop constructor that takes color, x, y
