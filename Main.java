@@ -91,111 +91,98 @@ public class Main {
         boolean isValid = board.withinChessboard(currentColumn, startingRow);
         System.out.println(pieceColor.name() + " " + pieceName.name() + " at (" + startingColumn + ", " + startingRow + ") is within board? " + isValid);
         
-        // create instance of class using a switch-case
-        Object chessPiece = null;
-        switch(pieceName){
-          case PAWN: 
-          //create pawn instance
-             chessPiece = new Pawn(pieceColor.name(), startingColumn.name().charAt(0), startingRow);
-          break;
-          case KNIGHT: 
-          // create knight instance
-           chessPiece = new Knight(pieceColor.name(), startingColumn.name().charAt(0), startingRow);
-          break;
-          case BISHOP:
-            // create bishop instance
-             chessPiece = new Bishop(pieceColor.name(), startingColumn.name().charAt(0), startingRow);
-          break;
-          case ROOK:
-            // create rook instance
-             chessPiece = new Rook(pieceColor.name(), startingColumn.name().charAt(0), startingRow);
-          break;
-          case QUEEN:
-            // create queen instance
-             chessPiece = new Queen(pieceColor.name(), startingColumn.name().charAt(0), startingRow);
-          break;
-          case KING:
-            // create king instance
-             chessPiece = new King(pieceColor.name(), startingColumn.name().charAt(0), startingRow);
-          break;
-        }
+        char targetCol;
+        int targetRow;
+        
         // prompt user for target position
         System.out.println("What is the target position?");
-        char targetCol;
+        // check target column
         while (true) { // loop to keep asking for the user input in case user enters invalid column
             System.out.println("Enter target column: 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'");
             char userInput = input.nextLine().charAt(0); //Turns user answer into uppercase to match enum values
-
+            
             try {
                 targetCol = userInput;
                 System.out.println("You selected column: " + targetCol);
                 break;
             } catch (IllegalArgumentException e) {
                 System.out.println("Invalid column. Please select a valid column.");
+            }
+        }
+        // Validate target row
+        while(true) { //loop to keep asking for the user input in case user enters invalid row
+            System.out.print("Enter the target row by typing a number (1-8): ");
+            String userInput = input.nextLine().trim();
+            
+            try {
+                targetRow = Integer.parseInt(userInput);
+                
+                if(targetRow >= 1 && targetRow <= 8) {
+                    System.out.println("You selected: " + targetRow);
+                    break;
+                } else{
+                    System.out.println("Please enter a number beetween 1-8:");
+                }
+            } catch(NumberFormatException e){
+                System.out.println("Please enter an integer number.");
             }
         }
         
-
-        int targetRow;
-        while(true) { //loop to keep asking for the user input in case user enters invalid row
-            System.out.print("Enter the target row by typing a number (1-8): ");
-            int userInput = input.nextInt();
-
-            try {
-                    targetRow = userInput;
-                if (targetRow >= 1 && targetRow <= 8) {
-                    System.out.println("You selected: " + targetRow);
-                    break;
-                } else {
-                    System.out.println("Please enter a number beetween 1-8:");
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Please enter an integer number.");
-            }
-        }
-        //input.close();?
-
-        if(targetRow != startingRow && targetCol != startingColumn.name().charAt(0)){
-          if(chessPiece.verifyTarget(targetCol, targetRow)){
-            System.out.println("Piece" + chessPiece.getPiece_name() "in position <x><y> can (not) move to target position <x><y>")
-          }
-        }
-        else{
-            System.out.println("Target position must be different than starting position");
-            while (true) { // loop to keep asking for the user input in case user enters invalid column
-            System.out.println("Enter target column: 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'");
-            char userInput = input.nextLine().charAt(0); //Turns user answer into uppercase to match enum values
-
-            try {
-                targetCol = userInput;
-                System.out.println("You selected column: " + targetCol);
+        if(targetCol == currentColumn && targetRow == startingRow){
+            System.out.println("Target position must be different than starting position.");
+        } 
+        else {
+            
+            boolean validMove = false;
+            
+            // create instance of class using a switch-case
+            switch(pieceName){
+        case PAWN: 
+        //create pawn instance
+        Pawn pawn = new Pawn(pieceColor.name(), startingColumn.name().charAt(0), startingRow);
+        validMove = pawn.verifyTarget(targetCol, targetRow);
+        break;
+        case KNIGHT: 
+        // create knight instance
+        Knight knight = new Knight(pieceColor.name(), startingColumn.name().charAt(0), startingRow);
+        validMove = knight.verifyTarget(targetCol, targetRow);
+        break;
+        case BISHOP:
+            // create bishop instance
+            Bishop bishop = new Bishop(pieceColor.name(), startingColumn.name().charAt(0), startingRow);
+            validMove = bishop.verifyTarget(targetCol, targetRow);
+            break;
+            case ROOK:
+                // create rook instance
+                Rook rook = new Rook(pieceColor.name(), startingColumn.name().charAt(0), startingRow);
+                validMove = rook.verifyTarget(targetCol, targetRow);
                 break;
-            } catch (IllegalArgumentException e) {
-                System.out.println("Invalid column. Please select a valid column.");
-            }
-        }
-             while(true) { //loop to keep asking for the user input in case user enters invalid row
-            System.out.print("Enter the target row by typing a number (1-8): ");
-            int userInput = input.nextInt();
-
-            try {
-                    targetRow = userInput;
-                if (targetRow >= 1 && targetRow <= 8) {
-                    System.out.println("You selected: " + targetRow);
-                    break;
-                } else {
-                    System.out.println("Please enter a number beetween 1-8:");
+                case QUEEN:
+                    // create queen instance
+                    Queen queen = new Queen(pieceColor.name(), startingColumn.name().charAt(0), startingRow);
+             validMove = queen.verifyTarget(targetCol, targetRow);
+             break;
+             case KING:
+                 // create king instance
+                 King king = new King(pieceColor.name(), startingColumn.name().charAt(0), startingRow);
+                 validMove = king.verifyTarget(targetCol, targetRow);
+                 break;
                 }
-            } catch (NumberFormatException e) {
-                System.out.println("Please enter an integer number.");
+                
+                // inform user of results can<not> move to target position
+                if (validMove) {
+                    System.out.println(pieceColor + " " + pieceName + " at " + currentColumn + startingRow + 
+                    " can move to " + targetCol + targetRow);
+                } else {
+                    System.out.println( pieceColor + " " + pieceName + " at " + currentColumn + startingRow + 
+                    " cannot move to " + targetCol + targetRow);
+                }
             }
-        }
         }
     }
-}
-
-// verify the taget pos is different from starting pos
-// verify if target position is valid using piece's validation method
-// inform user of results can<not> move to target position
-// ask user if they want to verify another target pos with original starting pos
-// if yes, start again, if not terminate game
+        
+        // verify the taget pos is different from starting pos
+        // verify if target position is valid using piece's validation method
+        // ask user if they want to verify another target pos with original starting pos
+        // if yes, start again, if not terminate game
+        
