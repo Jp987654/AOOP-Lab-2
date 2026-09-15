@@ -90,21 +90,23 @@ public class Main {
         char currentColumn = startingColumn.name().charAt(0);
         boolean isValid = board.withinChessboard(currentColumn, startingRow);
         System.out.println(pieceColor.name() + " " + pieceName.name() + " at (" + startingColumn + ", " + startingRow + ") is within board? " + isValid);
-        
-        char targetCol;
-        int targetRow;
-        
-        // prompt user for target position
-        System.out.println("What is the target position?");
-        // check target column
-        while (true) { // loop to keep asking for the user input in case user enters invalid column
-            System.out.println("Enter target column: 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'");
-            char userInput = input.nextLine().charAt(0); //Turns user answer into uppercase to match enum values
+        boolean playAgain = true;
+        while(playAgain){
+
+            char targetCol;
+            int targetRow;
             
-            try {
-                targetCol = userInput;
-                System.out.println("You selected column: " + targetCol);
-                break;
+            // prompt user for target position
+            System.out.println("What is the target position?");
+            // check target column
+            while (true) { // loop to keep asking for the user input in case user enters invalid column
+                System.out.println("Enter target column: 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'");
+                char userInput = input.nextLine().charAt(0); //Turns user answer into uppercase to match enum values
+                
+                try {
+                    targetCol = userInput;
+                    System.out.println("You selected column: " + targetCol);
+                    break;
             } catch (IllegalArgumentException e) {
                 System.out.println("Invalid column. Please select a valid column.");
             }
@@ -137,52 +139,68 @@ public class Main {
             
             // create instance of class using a switch-case
             switch(pieceName){
-        case PAWN: 
-        //create pawn instance
-        Pawn pawn = new Pawn(pieceColor.name(), startingColumn.name().charAt(0), startingRow);
-        validMove = pawn.verifyTarget(targetCol, targetRow);
-        break;
-        case KNIGHT: 
-        // create knight instance
-        Knight knight = new Knight(pieceColor.name(), startingColumn.name().charAt(0), startingRow);
-        validMove = knight.verifyTarget(targetCol, targetRow);
-        break;
-        case BISHOP:
-            // create bishop instance
-            Bishop bishop = new Bishop(pieceColor.name(), startingColumn.name().charAt(0), startingRow);
-            validMove = bishop.verifyTarget(targetCol, targetRow);
-            break;
-            case ROOK:
-                // create rook instance
-                Rook rook = new Rook(pieceColor.name(), startingColumn.name().charAt(0), startingRow);
-                validMove = rook.verifyTarget(targetCol, targetRow);
+                case PAWN: 
+                //create pawn instance
+                Pawn pawn = new Pawn(pieceColor.name(), startingColumn.name().charAt(0), startingRow);
+                validMove = pawn.verifyTarget(targetCol, targetRow);
                 break;
-                case QUEEN:
-                    // create queen instance
-                    Queen queen = new Queen(pieceColor.name(), startingColumn.name().charAt(0), startingRow);
-             validMove = queen.verifyTarget(targetCol, targetRow);
-             break;
-             case KING:
-                 // create king instance
-                 King king = new King(pieceColor.name(), startingColumn.name().charAt(0), startingRow);
-                 validMove = king.verifyTarget(targetCol, targetRow);
-                 break;
-                }
-                
-                // inform user of results can<not> move to target position
-                if (validMove) {
-                    System.out.println(pieceColor + " " + pieceName + " at " + currentColumn + startingRow + 
-                    " can move to " + targetCol + targetRow);
-                } else {
-                    System.out.println( pieceColor + " " + pieceName + " at " + currentColumn + startingRow + 
-                    " cannot move to " + targetCol + targetRow);
+                case KNIGHT: 
+                // create knight instance
+                Knight knight = new Knight(pieceColor.name(), startingColumn.name().charAt(0), startingRow);
+                validMove = knight.verifyTarget(targetCol, targetRow);
+                break;
+                case BISHOP:
+                    // create bishop instance
+                    Bishop bishop = new Bishop(pieceColor.name(), startingColumn.name().charAt(0), startingRow);
+                    validMove = bishop.verifyTarget(targetCol, targetRow);
+                    break;
+                    case ROOK:
+                        // create rook instance
+                        Rook rook = new Rook(pieceColor.name(), startingColumn.name().charAt(0), startingRow);
+                        validMove = rook.verifyTarget(targetCol, targetRow);
+                        break;
+                        case QUEEN:
+                            // create queen instance
+                            Queen queen = new Queen(pieceColor.name(), startingColumn.name().charAt(0), startingRow);
+                            validMove = queen.verifyTarget(targetCol, targetRow);
+                            break;
+                            case KING:
+                                // create king instance
+                                King king = new King(pieceColor.name(), startingColumn.name().charAt(0), startingRow);
+                                validMove = king.verifyTarget(targetCol, targetRow);
+                                break;
+                            }
+                            
+                            // inform user of results can<not> move to target position
+                            if (validMove) {
+                                System.out.println(pieceColor + " " + pieceName + " at " + currentColumn + startingRow + 
+                                " can move to " + targetCol + targetRow);
+                            } else {
+                                System.out.println( pieceColor + " " + pieceName + " at " + currentColumn + startingRow + 
+                                " cannot move to " + targetCol + targetRow);
+                            }
+                        }
+                        // ASK IF USER WANTS ANOTHER TARGET
+                         while (true) {
+                            System.out.print("Would you like to try another target position? (yes/no): ");
+                            String answer = input.nextLine().trim().toLowerCase();
+                            if (answer.equals("yes")) {
+                                break;
+                            } else if (answer.equals("no")) {
+                                playAgain = false;
+                                System.out.println("Game terminated.");
+                                break;
+                            } else {
+                                System.out.println("Please enter yes or no.");
+                            }
+                        }
+                    }                    
+                    input.close();
                 }
             }
-        }
-    }
-        
-        // verify the taget pos is different from starting pos
-        // verify if target position is valid using piece's validation method
-        // ask user if they want to verify another target pos with original starting pos
-        // if yes, start again, if not terminate game
-        
+                
+                // verify the taget pos is different from starting pos
+                // verify if target position is valid using piece's validation method
+                // ask user if they want to verify another target pos with original starting pos
+                // if yes, start again, if not terminate game
+                
