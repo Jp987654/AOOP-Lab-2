@@ -1,16 +1,18 @@
 public class Chessboard {
-    final int MAX_ROW = 8;
-    final int MIN_ROW = 1;
+    public static final int MAX_ROW = 8;
+    public static final int MIN_ROW = 1;
+    public static final char MIN_COL = 'a';
+    public static final char MAX_COL = 'h';
 
     public boolean withinChessboard(char column, int row){
-        if (column < 'a' || column > 'h') {
+        char lowerColumn = Character.toLowerCase(column);
+
+        if (lowerColumn < MIN_COL || lowerColumn > MAX_COL) {
             return false;
         }
-        else if (row < MIN_ROW || row > MAX_ROW) {
+        if (row < MIN_ROW || row > MAX_ROW) {
             return false;
         }
-        else {
             return true;
-        }
     }
 }
