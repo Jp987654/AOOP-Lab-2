@@ -1,4 +1,4 @@
-public class Knight {
+public class Knight { //Author Dante Alanis Meraz
     //Knight Attributes
     private String piece_name;
     private String color;

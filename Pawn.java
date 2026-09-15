@@ -1,4 +1,4 @@
-public class Pawn {
+public class Pawn { //Author Dante Alanis Meraz
     //Pawn Attributes
     private String piece_name;
     private String color;

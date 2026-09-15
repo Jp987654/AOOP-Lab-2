@@ -1,4 +1,4 @@
-public class Chessboard {
+public class Chessboard { //Author: Dante Alanis Meraz
     public static final int MAX_ROW = 8;
     public static final int MIN_ROW = 1;
     public static final char MIN_COL = 'a';

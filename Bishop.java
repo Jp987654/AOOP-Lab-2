@@ -1,4 +1,4 @@
-public class Bishop {
+public class Bishop { //Author Dante Alanis Meraz
     //Bishop Attributes
     private String piece_name;
     private String color;

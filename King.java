@@ -1,4 +1,4 @@
-public class King {
+public class King { //Author Dante Alanis Meraz
     //King Attributes
     private String piece_name;
     private String color;

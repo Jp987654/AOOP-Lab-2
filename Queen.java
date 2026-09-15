@@ -1,4 +1,4 @@
-public class Queen {
+public class Queen { //Author Dante Alanis Meraz
     //Queen Attributes
     private String piece_name;
     private String color;

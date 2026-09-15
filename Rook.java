@@ -1,4 +1,4 @@
-public class Rook {
+public class Rook {// Author Dante Alanis Meraz
     //Rook Attributes
     private String piece_name;
     private String color;

@@ -3,7 +3,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Main {
-    //Enums for PieceType,Color, and Location of x
+    //Enums for PieceType,Color, and Location of x Author Jose Cruz
     enum Color {
         WHITE, BLACK
     }
@@ -14,8 +14,10 @@ public class Main {
         A, B, C, D, E, F, G, H
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args){//main method for running game
         Scanner input = new Scanner(System.in);
+        boolean gameRunning = true;
+        while(gameRunning){
 
         //User input collection and error handling for piece type selection
         PieceType pieceName; //Create variable to hold enum value for piece type
@@ -32,6 +34,7 @@ public class Main {
                 System.out.println("Invalid piece type. Please select a valid piece.");
             }
         }
+        //Author Jose Cruz
 
         //User input collection and error handling for color selection
         Color pieceColor; //Create variable to hold enum value for color
@@ -48,7 +51,7 @@ public class Main {
                 System.out.println("Invalid color. Please select a valid color.");
             }
         }
-
+        //Author Jose Cruz
         //asking user to prompt starting position
         LocationX startingColumn;
         while (true) { // loop to keep asking for the user input in case user enters invalid column
@@ -83,9 +86,10 @@ public class Main {
                 System.out.println("Please enter an integer number.");
             }
         }
-        //input.close();?
+        //Author Jose Cruz
 
         //verify if the starting position is within the chesboard
+        //Author Franky Leyva
         Chessboard board = new Chessboard();
         char currentColumn = startingColumn.name().charAt(0);
         boolean isValid = board.withinChessboard(currentColumn, startingRow);
@@ -112,6 +116,7 @@ public class Main {
             }
         }
         // Validate target row
+        //Author Franky Leyva
         while(true) { //loop to keep asking for the user input in case user enters invalid row
             System.out.print("Enter the target row by typing a number (1-8): ");
             String userInput = input.nextLine().trim();
@@ -129,7 +134,7 @@ public class Main {
                 System.out.println("Please enter an integer number.");
             }
         }
-        
+        //Author Franky Leyva
         if(targetCol == currentColumn && targetRow == startingRow){
             System.out.println("Target position must be different than starting position.");
         } 
@@ -194,13 +199,25 @@ public class Main {
                                 System.out.println("Please enter yes or no.");
                             }
                         }
-                    }                    
-                    input.close();
-                }
-            }
-                
-                // verify the taget pos is different from starting pos
-                // verify if target position is valid using piece's validation method
-                // ask user if they want to verify another target pos with original starting pos
-                // if yes, start again, if not terminate game
+                    }      //Ask if user wants to play again
+                    if (gameRunning) {
+                        while (true) {
+                            System.out.print("Would you like to select another piece? (yes/no): ");
+                            String answer = input.nextLine().trim().toLowerCase();
+                            if (answer.equals("yes")) {
+                                break;
+                            } else if (answer.equals("no")) {
+                                gameRunning = false;
+                                System.out.println("Game terminated.");
+                                break;
+                            } else {
+                                System.out.println("Please enter yes or no.");
+                            }
+                        }
+                    }
+                    //input.close();
+        }
+        input.close();
+    }
+}//Author Franky Leyva
                 
